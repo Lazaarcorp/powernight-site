@@ -309,3 +309,21 @@ footer a:hover{opacity:1;color:var(--electric)}
 
 .cta-band .pay-note{position:relative;z-index:1;text-align:center;max-width:none;margin:22px auto 0;font-size:.85rem;color:rgba(255,255,255,.8)}
 .cta-band .pay-note a{text-decoration:underline}
+
+/* Appel à panélistes */
+.panel-cta{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:44px;align-items:center;margin-top:64px;padding:32px;border-radius:24px;background:var(--card);border:1px solid var(--line)}
+.panel-cta .panel-img img{width:100%;height:auto;border-radius:14px;box-shadow:0 20px 50px -20px rgba(30,34,200,.6);transition:transform .3s}
+.panel-cta .panel-img:hover img{transform:scale(1.02)}
+.panel-cta h3{font-size:1.4rem;font-weight:800;margin:10px 0 12px;line-height:1.25}
+/* Alliance */
+.alliance{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:stretch;max-width:900px;margin:0 auto}
+.alliance .card{display:block}
+.alliance-x{align-self:center;font-size:2.4rem;font-weight:800;background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+.alliance-link{display:inline-block;margin-top:14px;color:var(--electric);font-weight:600;font-size:.92rem}
+@media (max-width:820px){
+  .panel-cta{grid-template-columns:1fr;gap:28px;padding:20px}
+  .panel-cta .panel-img{max-width:360px;margin:0 auto}
+  .alliance{grid-template-columns:1fr;gap:12px}
+  .alliance-x{text-align:center;font-size:1.8rem}
+}
+.panel-cta--solo{grid-template-columns:1fr;max-width:820px;margin-left:auto;margin-right:auto;text-align:center}

@@ -1,0 +1,4 @@
+Déposez ici les photos et vidéos de l'Invest Power Night (1er octobre 2026),
+puis déclarez-les dans assets/js/events-data.js.
+Conseil : photos en .jpg ou .webp, 1600 px de large max, moins de 500 Ko chacune.
+Pour les vidéos longues, préférez YouTube (type "youtube") plutôt qu'un .mp4 sur l'hébergement.

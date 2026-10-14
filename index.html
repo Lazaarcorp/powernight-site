@@ -233,7 +233,8 @@ h1 .full{display:block;color:var(--text)}
 .price small{display:block;color:var(--muted);margin-top:.4rem}
 .price s{display:inline-block;margin-top:.8rem;color:var(--muted);font-size:.95rem}
 .price em{display:inline-block;margin:.8rem 0 0 .7rem;font-style:normal;font-weight:700;font-size:.85rem;color:var(--ink);background:#7dffb2;padding:.2rem .55rem}
-.packs[data-mode="event"] .price--year,.packs[data-mode="year"] .price--event{display:none}
+.packs[data-mode="event"] .price--year,.packs[data-mode="year"] .price--event,.packs[data-mode="event"] .only-year,.packs[data-mode="year"] .only-event{display:none!important}
+.btn--off,.btn--off.rv.in{opacity:.55;cursor:not-allowed;pointer-events:none}
 .perks{list-style:none;margin:0 0 2rem;padding:0;display:grid;gap:.6rem;color:#d6daf5}
 .perks:empty{display:none}
 .perks li{padding-left:1.4rem;position:relative}
@@ -409,7 +410,7 @@ h1 .full{display:block;color:var(--text)}
       <h2 id="call-h" class="rv">Vous êtes RSSI, Lead AI, DPO, juriste ou Red Teamer ?</h2>
       <ul class="chips rv"><li>15 min de parole</li><li>Script fourni</li><li>Faits sourcés</li><li>~80 personnes</li><li>Captation vidéo</li></ul>
       <p class="rv">Prenez place à la barre : script, questions et faits sourcés fournis. Captation vidéo, relais LinkedIn et mention sponsors.</p>
-      <a class="btn btn--light rv" href="mailto:contact@mypitchacademy.com?subject=Candidature%20pan%C3%A9liste%20Cyber%20Power%20Night">Proposer ma candidature <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <span class="btn btn--light btn--off rv" role="button" aria-disabled="true">Inscriptions complètes</span>
     </div>
   </section>
 
@@ -475,7 +476,7 @@ h1 .full{display:block;color:var(--text)}
       <div class="packs rv" data-mode="event">
         <article class="pack">
           <span class="mono">Pack</span>
-          <h3>Momentum</h3>
+          <h3><span class="only-event">Momentum</span><span class="only-year">Momentum Max</span></h3>
           <div class="price price--event"><b>750 €</b><small>HT / événement</small></div>
           <div class="price price--year"><b>3 500 €</b><small>HT / an · 6 événements</small><s>4 500 € HT</s><em>1 000 € HT économisés</em></div>
           <ul class="perks">
@@ -484,11 +485,12 @@ h1 .full{display:block;color:var(--text)}
             <li>Mise en avant de votre entreprise lors de la présentation</li>
             <li>Installation de votre kakémono dans la salle principale de l’événement</li>
           </ul>
-          <a class="btn btn--ghost" data-payment="sponsor-momentum" href="mailto:contact@mypitchacademy.com?subject=Sponsoring%20Power%20Night%20-%20Pack%20Momentum">Choisir Momentum <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--ghost only-event" data-payment="sponsor-momentum" href="https://buy.stripe.com/9B600j26Yggp8Kcc4rgjC0j">Choisir Momentum <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--ghost only-year" data-payment="sponsor-momentum-max" href="https://buy.stripe.com/28E7sL6ne5BLd0s0lJgjC0l">Choisir Momentum Max <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </article>
         <article class="pack pack--top">
           <span class="mono">Pack</span>
-          <h3>Catalyst</h3>
+          <h3><span class="only-event">Catalyst</span><span class="only-year">Catalyst Max</span></h3>
           <div class="price price--event"><b>1 599 €</b><small>HT / événement</small></div>
           <div class="price price--year"><b>7 500 €</b><small>HT / an · 6 événements</small><s>9 594 € HT</s><em>2 094 € HT économisés</em></div>
           <ul class="perks">
@@ -497,10 +499,11 @@ h1 .full{display:block;color:var(--text)}
             <li>Prise de parole en tant qu’expert ou pitch de votre projet startup</li>
             <li>Stand dédié pour présenter et vendre vos produits et services</li>
           </ul>
-          <a class="btn btn--primary" data-payment="sponsor-catalyst" href="mailto:contact@mypitchacademy.com?subject=Sponsoring%20Power%20Night%20-%20Pack%20Catalyst">Choisir Catalyst <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--primary only-event" data-payment="sponsor-catalyst" href="https://buy.stripe.com/00w3cvfXO9S1aSk4BZgjC0k">Choisir Catalyst <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--primary only-year" data-payment="sponsor-catalyst-max" href="https://buy.stripe.com/8x228r6nec096C43xVgjC0m">Choisir Catalyst Max <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </article>
       </div>
-      <p class="fine rv">L’abonnement annuel couvre les 6 Power Night de l’année. Économie calculée par rapport au tarif à l’événement. <a href="mailto:contact@mypitchacademy.com?subject=Sponsoring%20Cyber%20Power%20Night">Recevoir le dossier sponsor</a>.</p>
+      <p class="fine rv">L’abonnement annuel couvre les 6 Power Night de l’année. Économie calculée par rapport au tarif à l’événement.</p>
     </div>
   </section>
 
@@ -512,7 +515,7 @@ h1 .full{display:block;color:var(--text)}
       <div class="alliance rv">
         <a href="https://mypitchacademy.com" target="_blank" rel="noopener"><h3>My Pitch Academy</h3><p>Incubateur et cabinet d’accompagnement de startups : stratégie, pitch, structuration commerciale, automatisation et IA.</p><span class="lk">mypitchacademy.com ↗</span></a>
         <div class="x" aria-hidden="true">×</div>
-        <a href="https://spidr.fr" target="_blank" rel="noopener"><h3>SPIDR</h3><p>Cabinet spécialisé dans les projets data, qui accompagne ses clients avec des talents data experts.</p><span class="lk">spidr.fr ↗</span></a>
+        <a href="https://spidr.fr" target="_blank" rel="noopener"><h3>SPIDR</h3><p>Cabinet spécialisé en data et en IA, qui met à disposition son expertise pour mener à bien vos projets.</p><span class="lk">spidr.fr ↗</span></a>
       </div>
     </div>
   </section>

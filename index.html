@@ -162,6 +162,20 @@ h1 .full{display:block;color:var(--text)}
 .vote button[data-v="coupable"][aria-pressed="true"]{background:var(--alert);border-color:var(--alert);color:#fff}
 .vote button[data-v="acquitte"][aria-pressed="true"]{background:var(--signal);border-color:var(--signal);color:var(--ink)}
 .vote__out{font-size:.92rem;color:var(--muted)!important}
+.vdlg{max-width:440px;width:calc(100% - 32px);padding:0;border:1px solid var(--line-2);background:#0e0a26;color:var(--text)}
+.vdlg::backdrop{background:rgba(8,6,24,.78)}
+.vdlg form{padding:1.8rem 1.6rem 1.5rem}
+.vdlg__k{margin:0 0 .6rem;color:var(--signal);font:400 .8rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em}
+.vdlg h3{margin:0 0 1.2rem;font:900 1.7rem/1.05 var(--display);text-transform:uppercase}
+.vdlg label{display:block;margin-bottom:.45rem;font-size:.9rem;color:#d6daf5}
+.vdlg input[name=name]{width:100%;box-sizing:border-box;padding:.85rem 1rem;background:transparent;border:1px solid var(--line-2);color:var(--text);font:inherit;font-size:1rem}
+.vdlg input[name=name]:focus{outline:none;border-color:var(--signal)}
+.vdlg__hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.vdlg__note{margin:.8rem 0 1.3rem;font-size:.8rem;color:var(--muted)}
+.vdlg__act{display:flex;gap:.8rem;justify-content:flex-end}
+.vdlg__act button{padding:.8rem 1.3rem;border:1px solid var(--line-2);background:transparent;color:var(--text);font:800 .95rem/1 var(--display);text-transform:uppercase;letter-spacing:.03em;cursor:pointer}
+.vdlg__act button[type=submit]{background:var(--signal);border-color:var(--signal);color:var(--ink)}
+.vdlg__act button:disabled{opacity:.5;cursor:wait}
 
 /* call for panelists */
 .call{position:relative;padding:clamp(90px,10vw,130px) 0;background:linear-gradient(120deg,#2a0b4a 0%,#2324c8 48%,#4c7cf0 100%);overflow:hidden}
@@ -394,6 +408,17 @@ h1 .full{display:block;color:var(--text)}
             <button type="button" data-v="acquitte" aria-pressed="false">Acquitté</button>
           </div>
           <p class="vote__out" id="voteOut" aria-live="polite">Votre intuition avant les plaidoiries ?</p>
+          <dialog class="vdlg" id="voteDlg" aria-labelledby="vdlgT">
+            <form id="voteForm" novalidate>
+              <p class="vdlg__k" id="vdlgK">Pré-verdict</p>
+              <h3 id="vdlgT">Qui rend ce verdict ?</h3>
+              <label for="voteName">Votre nom ou pseudo</label>
+              <input id="voteName" name="name" type="text" maxlength="40" autocomplete="nickname" required>
+              <input class="vdlg__hp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <p class="vdlg__note">Votre nom ou pseudo et votre verdict sont transmis à l’équipe Power Night.</p>
+              <div class="vdlg__act"><button type="button" id="voteCancel">Annuler</button><button type="submit" id="voteSend">Envoyer</button></div>
+            </form>
+          </dialog>
         </div>
         <div class="box">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="5" r="2.5"/><circle cx="18" cy="5" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.3 7.2l3.5 8.5M16.7 7.2l-3.5 8.5M8.5 5h7"/></svg>
@@ -655,12 +680,48 @@ h1 .full{display:block;color:var(--text)}
   new IntersectionObserver(([e]) => { if (e.isIntersecting && !played) { played = true; play(); } }, {threshold: .35}).observe(term);
   document.getElementById('replay').addEventListener('click', play);
 
-  /* pré-verdict (stocké uniquement dans ce navigateur) */
+  /* pré-verdict : nom ou pseudo demandé, puis envoi par e-mail à l'équipe */
   const out = document.getElementById('voteOut'), vbtns = document.querySelectorAll('.vote button');
-  const msg = {coupable: 'Pré-verdict noté : coupable. Les plaidoiries vous feront-elles changer d’avis le 15 décembre ?', acquitte: 'Pré-verdict noté : acquitté. Le Red Teamer a peut-être de quoi vous ébranler le 15 décembre.'};
-  const setV = v => { vbtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); if (msg[v]) out.textContent = msg[v]; };
-  try { setV(localStorage.getItem('pn-verdict')); } catch (e) {}
-  vbtns.forEach(b => b.addEventListener('click', () => { setV(b.dataset.v); try { localStorage.setItem('pn-verdict', b.dataset.v); } catch (e) {} }));
+  const dlg = document.getElementById('voteDlg'), vform = document.getElementById('voteForm'), vname = document.getElementById('voteName'), vsend = document.getElementById('voteSend'), vk = document.getElementById('vdlgK');
+  const msg = {
+    coupable: n => (n ? n + ', p' : 'P') + 'ré-verdict noté : coupable. Les plaidoiries vous feront-elles changer d’avis le 15 décembre ?',
+    acquitte: n => (n ? n + ', p' : 'P') + 'ré-verdict noté : acquitté. Le Red Teamer a peut-être de quoi vous ébranler le 15 décembre.'
+  };
+  const setV = (v, n) => { vbtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); if (msg[v]) out.textContent = msg[v](n); };
+  try { setV(localStorage.getItem('pn-verdict'), localStorage.getItem('pn-name')); } catch (e) {}
+  let pending = null;
+  const closeDlg = () => { if (dlg.open) dlg.close(); };
+  const send = async n => {
+    vsend.disabled = true;
+    const fd = new FormData();
+    fd.append('name', n); fd.append('verdict', pending); fd.append('website', vform.elements.website.value);
+    try {
+      const r = await fetch('vote.php', {method: 'POST', body: fd});
+      const j = await r.json();
+      if (j.ok) {
+        setV(pending, n);
+        try { localStorage.setItem('pn-verdict', pending); localStorage.setItem('pn-name', n); } catch (e) {}
+      } else {
+        out.textContent = j.error === 'wait' ? 'Un instant… réessayez dans quelques secondes.' : 'Envoi impossible, réessayez.';
+      }
+    } catch (e) { out.textContent = 'Envoi impossible, vérifiez votre connexion.'; }
+    vsend.disabled = false; closeDlg();
+  };
+  vbtns.forEach(b => b.addEventListener('click', () => {
+    pending = b.dataset.v;
+    vk.textContent = 'Pré-verdict · ' + b.textContent;
+    try { vname.value = localStorage.getItem('pn-name') || ''; } catch (e) {}
+    if (typeof dlg.showModal === 'function') { dlg.showModal(); vname.focus(); }
+    else { const n = (prompt('Votre nom ou pseudo') || '').trim(); if (n.length >= 2) send(n); }
+  }));
+  document.getElementById('voteCancel').addEventListener('click', closeDlg);
+  vform.addEventListener('submit', e => {
+    e.preventDefault();
+    const n = vname.value.trim();
+    if (n.length < 2) { vname.focus(); vname.setCustomValidity('2 caractères minimum'); vname.reportValidity(); return; }
+    vname.setCustomValidity(''); send(n);
+  });
+  vname.addEventListener('input', () => vname.setCustomValidity(''));
 
   /* progression de la timeline */
   const tl = document.getElementById('tl'), tp = document.getElementById('tlProg'), items = tl.querySelectorAll('li');

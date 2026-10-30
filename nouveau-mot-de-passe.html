@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mot de passe — Power Night</title>
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Réinitialisation du mot de passe de votre compte Power Night.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0e0a26;--ink-2:#141040;--ink-3:#1b1857;
+  --line:rgba(170,182,255,.14);--line-2:rgba(170,182,255,.28);
+  --text:#f4f5ff;--muted:#a9b0de;--signal:#8fa4ff;--signal-dim:rgba(143,164,255,.18);
+  --ok:#5ee0a0;--alert:#ff4d6d;--alert-dim:rgba(255,77,109,.16);
+  --display:"Big Shoulders Display","Hanken Grotesk",sans-serif;
+  --body:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --cut:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--ink);isolation:isolate;color:var(--text);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(70% 60% at 0% 0%,rgba(42,11,74,.95),transparent 70%),radial-gradient(80% 70% at 100% 100%,rgba(30,34,200,.55),transparent 70%),radial-gradient(40% 40% at 100% 100%,rgba(59,130,246,.35),transparent 70%),var(--ink)}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em;font-size:.72rem}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px clamp(16px,4vw,56px)}
+.brand img{display:block;height:44px;width:auto}
+.lang{display:flex;gap:4px}
+.lang button{background:none;border:0;color:var(--muted);font:500 .72rem/1 var(--mono);letter-spacing:.14em;padding:8px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{color:var(--text);box-shadow:inset 0 0 0 1px var(--line-2)}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 16px 56px}
+.card{width:100%;max-width:520px;background:rgba(20,16,64,.72);border:1px solid var(--line);padding:clamp(28px,6vw,44px);clip-path:var(--cut);backdrop-filter:blur(8px)}
+.kicker{color:var(--signal);margin:0 0 10px}
+.is-error .kicker{color:var(--alert)}
+h1{font:800 clamp(2rem,7vw,2.8rem)/1 var(--display);text-transform:uppercase;letter-spacing:.01em;margin:0 0 14px}
+p{color:var(--muted);margin:0 0 12px}
+form{display:grid;gap:16px;margin-top:22px}
+label{display:grid;gap:6px;font-size:.9rem;color:var(--text)}
+.field{position:relative}
+input{width:100%;font:500 1rem var(--body);color:var(--text);background:rgba(14,10,38,.6);border:1px solid var(--line-2);padding:.9rem 3rem .9rem 1rem;outline:none;transition:border-color .2s}
+input:focus{border-color:var(--signal)}
+.toggle{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--muted);font:500 .68rem/1 var(--mono);letter-spacing:.1em;padding:8px;cursor:pointer;text-transform:uppercase}
+.rules{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:.88rem}
+.rules li{color:var(--muted);padding-left:22px;position:relative}
+.rules li::before{content:"";position:absolute;left:2px;top:.5em;width:10px;height:10px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line-2)}
+.rules li.ok{color:var(--text)}
+.rules li.ok::before{background:var(--ok);box-shadow:none}
+.msg{font-size:.92rem;margin:0;padding:.75rem 1rem;border:1px solid var(--alert);background:var(--alert-dim);color:#ffd5dd}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;font:700 .95rem/1 var(--body);text-decoration:none;padding:1.05rem 1.5rem;border:0;cursor:pointer;background:var(--signal);color:var(--ink);clip-path:var(--cut);transition:background .3s,opacity .3s;width:100%}
+.btn:hover{background:#b3c1ff}
+.btn[disabled]{opacity:.5;cursor:default}
+.btn--ghost{background:none;color:var(--text);box-shadow:inset 0 0 0 1px var(--line-2);clip-path:none;margin-top:14px}
+.btn--ghost:hover{background:none;color:var(--signal);box-shadow:inset 0 0 0 1px var(--signal)}
+.steps{margin:18px 0 0;padding:16px 18px 16px 38px;border:1px solid var(--line);background:rgba(14,10,38,.5);color:var(--text);font-size:.96rem}
+.steps li{margin:6px 0}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 28px}
+footer a{color:var(--muted)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header>
+  <a href="/" class="brand" aria-label="Power Night"><img src="assets/img/logo-power-night.png" alt="Power Night" width="84" height="44"></a>
+  <div class="lang" role="group" aria-label="Langue / Language">
+    <button type="button" data-set-lang="fr" aria-pressed="true">FR</button>
+    <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<main>
+  <section class="card" id="card" aria-live="polite">
+
+    <!-- Chargement -->
+    <div data-state="loading">
+      <p class="mono kicker" data-fr="Un instant" data-en="One moment">Un instant</p>
+      <p data-fr="Vérification de votre lien…" data-en="Checking your link…">Vérification de votre lien…</p>
+    </div>
+
+    <!-- 1. Demander un lien (mot de passe oublié) -->
+    <div data-state="request" hidden>
+      <p class="mono kicker" data-fr="Mot de passe oublié" data-en="Forgot password">Mot de passe oublié</p>
+      <h1 data-fr="Réinitialiser" data-en="Reset it">Réinitialiser</h1>
+      <p data-fr="Indiquez l'adresse e-mail de votre compte Power Night : nous vous envoyons un lien pour choisir un nouveau mot de passe." data-en="Enter the email address of your Power Night account: we will send you a link to choose a new password.">Indiquez l'adresse e-mail de votre compte Power Night : nous vous envoyons un lien pour choisir un nouveau mot de passe.</p>
+      <form id="request-form" novalidate>
+        <label><span data-fr="Adresse e-mail" data-en="Email address">Adresse e-mail</span>
+          <input id="email" type="email" autocomplete="email" required placeholder="vous@entreprise.com">
+        </label>
+        <p class="msg" id="request-error" hidden></p>
+        <button class="btn" type="submit" id="request-btn" data-fr="Recevoir le lien" data-en="Send me the link">Recevoir le lien</button>
+      </form>
+    </div>
+
+    <!-- 2. Lien envoyé -->
+    <div data-state="sent" hidden>
+      <p class="mono kicker" data-fr="E-mail envoyé" data-en="Email sent">E-mail envoyé</p>
+      <h1 data-fr="Vérifiez vos e-mails" data-en="Check your inbox">Vérifiez vos e-mails</h1>
+      <p data-fr="Si un compte existe pour cette adresse, vous allez recevoir un lien dans quelques instants. Pensez à regarder dans les courriers indésirables." data-en="If an account exists for this address, you will receive a link in a few moments. Remember to check your spam folder.">Si un compte existe pour cette adresse, vous allez recevoir un lien dans quelques instants. Pensez à regarder dans les courriers indésirables.</p>
+    </div>
+
+    <!-- 3. Choisir le nouveau mot de passe -->
+    <div data-state="form" hidden>
+      <p class="mono kicker" data-fr="Nouveau mot de passe" data-en="New password">Nouveau mot de passe</p>
+      <h1 data-fr="Choisissez-le" data-en="Choose it">Choisissez-le</h1>
+      <p id="for-email"></p>
+      <form id="password-form" novalidate>
+        <label><span data-fr="Nouveau mot de passe" data-en="New password">Nouveau mot de passe</span>
+          <span class="field"><input id="pw" type="password" autocomplete="new-password" required><button type="button" class="toggle" data-toggle="pw" data-fr="Voir" data-en="Show">Voir</button></span>
+        </label>
+        <ul class="rules" id="rules">
+          <li data-rule="len" data-fr="8 caractères minimum" data-en="At least 8 characters">8 caractères minimum</li>
+          <li data-rule="letter" data-fr="Au moins une lettre" data-en="At least one letter">Au moins une lettre</li>
+          <li data-rule="digit" data-fr="Au moins un chiffre" data-en="At least one number">Au moins un chiffre</li>
+          <li data-rule="special" data-fr="Au moins un caractère spécial (!, ?, @, #…)" data-en="At least one special character (!, ?, @, #…)">Au moins un caractère spécial (!, ?, @, #…)</li>
+        </ul>
+        <label><span data-fr="Confirmez le mot de passe" data-en="Confirm the password">Confirmez le mot de passe</span>
+          <span class="field"><input id="pw2" type="password" autocomplete="new-password" required><button type="button" class="toggle" data-toggle="pw2" data-fr="Voir" data-en="Show">Voir</button></span>
+        </label>
+        <p class="msg" id="form-error" hidden></p>
+        <button class="btn" type="submit" id="save-btn" disabled data-fr="Enregistrer le mot de passe" data-en="Save the password">Enregistrer le mot de passe</button>
+      </form>
+    </div>
+
+    <!-- 4. C'est fait -->
+    <div data-state="done" hidden>
+      <p class="mono kicker" data-fr="C'est fait" data-en="All set">C'est fait</p>
+      <h1 data-fr="Mot de passe modifié" data-en="Password updated">Mot de passe modifié</h1>
+      <p data-fr="Votre nouveau mot de passe est enregistré." data-en="Your new password has been saved.">Votre nouveau mot de passe est enregistré.</p>
+      <ol class="steps">
+        <li data-fr="Ouvrez l'application Power Night." data-en="Open the Power Night app.">Ouvrez l'application Power Night.</li>
+        <li data-fr="Connectez-vous avec votre adresse e-mail et ce nouveau mot de passe." data-en="Sign in with your email address and this new password.">Connectez-vous avec votre adresse e-mail et ce nouveau mot de passe.</li>
+      </ol>
+      <a class="btn btn--ghost" href="/" data-fr="Découvrir les soirées Power Night" data-en="Discover Power Night events">Découvrir les soirées Power Night</a>
+    </div>
+
+    <!-- Lien expiré -->
+    <div data-state="expired" hidden>
+      <p class="mono kicker" data-fr="Lien expiré" data-en="Link expired">Lien expiré</p>
+      <h1 data-fr="Lien plus valide" data-en="Link no longer valid">Lien plus valide</h1>
+      <p data-fr="Ce lien a expiré ou a déjà été utilisé. Demandez-en un nouveau : il reste valable une heure." data-en="This link has expired or has already been used. Request a new one: it stays valid for one hour.">Ce lien a expiré ou a déjà été utilisé. Demandez-en un nouveau : il reste valable une heure.</p>
+      <button class="btn" type="button" id="new-link-btn" data-fr="Recevoir un nouveau lien" data-en="Send me a new link">Recevoir un nouveau lien</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span data-fr="Une question ?" data-en="Any question?">Une question ?</span>
+  <a href="mailto:contact@powernight.fr">contact@powernight.fr</a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+<script>
+(function () {
+  // Clé publique (la même que dans l'application) : elle ne donne accès qu'à ce que les règles de sécurité autorisent.
+  var SUPABASE_URL = 'https://hxrqmssxhrmrysucqnok.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_Ne33ZUvAKdd63QvAptA1IQ_xI1oQrfw';
+  var PAGE_URL = 'https://powernight.fr/nouveau-mot-de-passe.html';
+
+  var I18N = {
+    fr: {
+      title: 'Mot de passe — Power Night',
+      forEmail: 'Pour le compte {email}.',
+      badEmail: 'Adresse e-mail invalide.',
+      tooMany: 'Trop de demandes. Patientez quelques minutes puis réessayez.',
+      generic: 'Une erreur est survenue. Réessayez ou écrivez-nous à contact@powernight.fr.',
+      mismatch: 'Les deux mots de passe ne sont pas identiques.',
+      weak: 'Mot de passe trop faible : 8 caractères minimum, dont une lettre, un chiffre et un caractère spécial.',
+      same: 'Choisissez un mot de passe différent de l\'ancien.',
+      show: 'Voir', hide: 'Masquer'
+    },
+    en: {
+      title: 'Password — Power Night',
+      forEmail: 'For the account {email}.',
+      badEmail: 'Invalid email address.',
+      tooMany: 'Too many requests. Please wait a few minutes and try again.',
+      generic: 'Something went wrong. Try again or email us at contact@powernight.fr.',
+      mismatch: 'The two passwords do not match.',
+      weak: 'Password too weak: at least 8 characters, including a letter, a number and a special character.',
+      same: 'Choose a password different from the old one.',
+      show: 'Show', hide: 'Hide'
+    }
+  };
+  var lang = 'fr';
+  var currentEmail = '';
+  function t(k) { return I18N[lang][k]; }
+
+  function show(state) {
+    document.querySelectorAll('[data-state]').forEach(function (el) { el.hidden = el.getAttribute('data-state') !== state; });
+    document.getElementById('card').classList.toggle('is-error', state === 'expired');
+  }
+  function setError(id, msg) {
+    var el = document.getElementById(id);
+    el.textContent = msg || '';
+    el.hidden = !msg;
+  }
+  function setLang(l) {
+    lang = l;
+    document.documentElement.lang = l;
+    document.title = t('title');
+    document.querySelectorAll('[data-' + l + ']').forEach(function (el) { el.textContent = el.getAttribute('data-' + l); });
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === l)); });
+    if (currentEmail) document.getElementById('for-email').textContent = t('forEmail').replace('{email}', currentEmail);
+    try { localStorage.setItem('pn-lang', l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('pn-lang'); } catch (e) {}
+  setLang(saved === 'fr' || saved === 'en' ? saved : ((navigator.language || 'fr').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en'));
+  document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-set-lang')); });
+  });
+
+  // Lecture du lien reçu par e-mail, puis effacement immédiat du jeton dans la barre d'adresse
+  var hash = new URLSearchParams(location.hash.replace(/^#/, ''));
+  var query = new URLSearchParams(location.search);
+  var accessToken = hash.get('access_token');
+  var refreshToken = hash.get('refresh_token');
+  var linkError = hash.has('error') || hash.has('error_code') || query.has('error') || query.has('error_code');
+  if (location.hash || location.search) {
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+  }
+
+  var sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+  }) : null;
+
+  // --- Demande de lien
+  function requestLink(e) {
+    if (e) e.preventDefault();
+    var email = document.getElementById('email').value.trim();
+    setError('request-error', '');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('request-error', t('badEmail')); return; }
+    if (!sb) { setError('request-error', t('generic')); return; }
+    var btn = document.getElementById('request-btn');
+    btn.disabled = true;
+    sb.auth.resetPasswordForEmail(email, { redirectTo: PAGE_URL }).then(function (res) {
+      btn.disabled = false;
+      if (res.error && /rate|limit|seconds/i.test(res.error.message)) { setError('request-error', t('tooMany')); return; }
+      // Même message que l'adresse existe ou non (on ne révèle pas quels comptes existent)
+      show('sent');
+    }).catch(function () { btn.disabled = false; setError('request-error', t('generic')); });
+  }
+  document.getElementById('request-form').addEventListener('submit', requestLink);
+  document.getElementById('new-link-btn').addEventListener('click', function () { show('request'); document.getElementById('email').focus(); });
+
+  // --- Nouveau mot de passe
+  var RULES = {
+    len: function (p) { return p.length >= 8; },
+    letter: function (p) { return /[A-Za-z]/.test(p); },
+    digit: function (p) { return /\d/.test(p); },
+    special: function (p) { return /[^A-Za-z0-9\s]/.test(p); }
+  };
+  var pw = document.getElementById('pw');
+  var pw2 = document.getElementById('pw2');
+  function strong(p) { return Object.keys(RULES).every(function (k) { return RULES[k](p); }); }
+  function refresh() {
+    document.querySelectorAll('#rules [data-rule]').forEach(function (li) { li.classList.toggle('ok', RULES[li.getAttribute('data-rule')](pw.value)); });
+    document.getElementById('save-btn').disabled = !(strong(pw.value) && pw2.value.length > 0);
+  }
+  pw.addEventListener('input', refresh);
+  pw2.addEventListener('input', refresh);
+  document.querySelectorAll('[data-toggle]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var input = document.getElementById(b.getAttribute('data-toggle'));
+      var visible = input.type === 'text';
+      input.type = visible ? 'password' : 'text';
+      b.textContent = visible ? t('show') : t('hide');
+    });
+  });
+
+  document.getElementById('password-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    setError('form-error', '');
+    if (!strong(pw.value)) { setError('form-error', t('weak')); return; }
+    if (pw.value !== pw2.value) { setError('form-error', t('mismatch')); return; }
+    if (!sb) { setError('form-error', t('generic')); return; }
+    var btn = document.getElementById('save-btn');
+    btn.disabled = true;
+    sb.auth.updateUser({ password: pw.value }).then(function (res) {
+      if (res.error) {
+        btn.disabled = false;
+        var m = res.error.message || '';
+        if (/different|same/i.test(m)) setError('form-error', t('same'));
+        else if (/weak|characters|password should/i.test(m)) setError('form-error', t('weak'));
+        else if (/expired|invalid|jwt|session/i.test(m)) show('expired');
+        else setError('form-error', t('generic'));
+        return;
+      }
+      pw.value = ''; pw2.value = '';
+      // On ferme la session ouverte par le lien : le membre se reconnecte dans l'app
+      sb.auth.signOut().finally(function () { show('done'); });
+    }).catch(function () { btn.disabled = false; setError('form-error', t('generic')); });
+  });
+
+  // --- Point de départ
+  if (linkError) { show('expired'); return; }
+  if (!accessToken || !refreshToken) { show('request'); return; }
+  if (!sb) { show('expired'); return; }
+  sb.auth.setSession({ access_token: accessToken, refresh_token: refreshToken }).then(function (res) {
+    if (res.error || !res.data || !res.data.user) { show('expired'); return; }
+    currentEmail = res.data.user.email || '';
+    if (currentEmail) document.getElementById('for-email').textContent = t('forEmail').replace('{email}', currentEmail);
+    show('form');
+    pw.focus();
+  }).catch(function () { show('expired'); });
+})();
+</script>
+</body>
+</html>

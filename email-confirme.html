@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adresse e-mail confirmée — Power Night</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Confirmation de votre adresse e-mail Power Night.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0e0a26;--ink-2:#141040;--ink-3:#1b1857;
+  --line:rgba(170,182,255,.14);--line-2:rgba(170,182,255,.28);
+  --text:#f4f5ff;--muted:#a9b0de;--signal:#8fa4ff;--signal-dim:rgba(143,164,255,.18);
+  --alert:#ff4d6d;--alert-dim:rgba(255,77,109,.16);
+  --display:"Big Shoulders Display","Hanken Grotesk",sans-serif;
+  --body:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --cut:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--ink);isolation:isolate;color:var(--text);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(70% 60% at 0% 0%,rgba(42,11,74,.95),transparent 70%),radial-gradient(80% 70% at 100% 100%,rgba(30,34,200,.55),transparent 70%),radial-gradient(40% 40% at 100% 100%,rgba(59,130,246,.35),transparent 70%),var(--ink)}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em;font-size:.72rem}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px clamp(16px,4vw,56px)}
+.brand img{display:block;height:44px;width:auto}
+.lang{display:flex;gap:4px}
+.lang button{background:none;border:0;color:var(--muted);font:500 .72rem/1 var(--mono);letter-spacing:.14em;padding:8px 10px;cursor:pointer;box-shadow:inset 0 0 0 1px transparent}
+.lang button[aria-pressed="true"]{color:var(--text);box-shadow:inset 0 0 0 1px var(--line-2)}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 16px 56px}
+.card{width:100%;max-width:560px;background:rgba(20,16,64,.72);border:1px solid var(--line);padding:clamp(28px,6vw,48px);clip-path:var(--cut);text-align:center;backdrop-filter:blur(8px)}
+.icon{width:72px;height:72px;margin:0 auto 22px;display:grid;place-items:center;border-radius:50%;background:var(--signal-dim);box-shadow:inset 0 0 0 1px var(--signal)}
+.icon svg{width:34px;height:34px;stroke:var(--signal);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.is-error .icon{background:var(--alert-dim);box-shadow:inset 0 0 0 1px var(--alert)}
+.is-error .icon svg{stroke:var(--alert)}
+.kicker{color:var(--signal);margin:0 0 10px}
+.is-error .kicker{color:var(--alert)}
+h1{font:800 clamp(2.2rem,8vw,3.2rem)/1 var(--display);text-transform:uppercase;letter-spacing:.01em;margin:0 0 16px}
+p{color:var(--muted);margin:0 0 12px}
+.steps{text-align:left;margin:24px 0 8px;padding:18px 20px;border:1px solid var(--line);background:rgba(14,10,38,.5);list-style:none;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-left:34px;margin:8px 0;color:var(--text);font-size:.98rem}
+.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:.15em;font:500 .72rem/1.6 var(--mono);color:var(--signal)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;font:700 .95rem/1 var(--body);text-decoration:none;padding:1.05rem 1.5rem;margin-top:22px;background:var(--signal);color:var(--ink);clip-path:var(--cut);transition:background .3s}
+.btn:hover{background:#b3c1ff}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 28px}
+footer a{color:var(--muted)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header>
+  <a href="/" class="brand" aria-label="Power Night"><img src="assets/img/logo-power-night.png" alt="Power Night" width="84" height="44"></a>
+  <div class="lang" role="group" aria-label="Langue / Language">
+    <button type="button" data-set-lang="fr" aria-pressed="true">FR</button>
+    <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<main>
+  <section class="card" id="card" aria-live="polite">
+    <div class="icon" aria-hidden="true">
+      <svg id="icon-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      <svg id="icon-err" viewBox="0 0 24 24" hidden><path d="M12 7v6M12 16.5v.5"/><circle cx="12" cy="12" r="9.5"/></svg>
+    </div>
+
+    <!-- Succès -->
+    <div data-state="ok">
+      <p class="mono kicker" data-fr="Compte activé" data-en="Account activated">Compte activé</p>
+      <h1 data-fr="Adresse e‑mail confirmée" data-en="Email address confirmed">Adresse e‑mail confirmée</h1>
+      <p data-fr="Merci ! Votre adresse e-mail est bien validée et votre compte Power Night est prêt." data-en="Thank you! Your email address has been verified and your Power Night account is ready.">Merci ! Votre adresse e-mail est bien validée et votre compte Power Night est prêt.</p>
+      <ol class="steps">
+        <li data-fr="Revenez dans l'application Power Night." data-en="Go back to the Power Night app.">Revenez dans l'application Power Night.</li>
+        <li data-fr="Connectez-vous avec votre adresse e-mail et votre mot de passe." data-en="Sign in with your email address and password.">Connectez-vous avec votre adresse e-mail et votre mot de passe.</li>
+        <li data-fr="Complétez votre profil et découvrez les prochaines soirées." data-en="Complete your profile and discover the upcoming events.">Complétez votre profil et découvrez les prochaines soirées.</li>
+      </ol>
+    </div>
+
+    <!-- Lien expiré ou invalide -->
+    <div data-state="error" hidden>
+      <p class="mono kicker" data-fr="Lien expiré" data-en="Link expired">Lien expiré</p>
+      <h1 data-fr="Ce lien n'est plus valide" data-en="This link is no longer valid">Ce lien n'est plus valide</h1>
+      <p data-fr="Le lien de confirmation a expiré ou a déjà été utilisé. Si votre adresse est déjà confirmée, connectez-vous simplement dans l'application." data-en="The confirmation link has expired or has already been used. If your address is already confirmed, simply sign in to the app.">Le lien de confirmation a expiré ou a déjà été utilisé. Si votre adresse est déjà confirmée, connectez-vous simplement dans l'application.</p>
+      <p data-fr="Sinon, recommencez l'inscription dans l'application pour recevoir un nouvel e-mail." data-en="Otherwise, sign up again in the app to receive a new email.">Sinon, recommencez l'inscription dans l'application pour recevoir un nouvel e-mail.</p>
+    </div>
+
+    <!-- Lien de réinitialisation du mot de passe -->
+    <div data-state="recovery" hidden>
+      <p class="mono kicker" data-fr="Mot de passe" data-en="Password">Mot de passe</p>
+      <h1 data-fr="Lien reçu" data-en="Link received">Lien reçu</h1>
+      <p data-fr="Redirection vers la page de choix du nouveau mot de passe…" data-en="Redirecting to the new password page…">Redirection vers la page de choix du nouveau mot de passe…</p>
+    </div>
+
+    <a class="btn" href="/" data-fr="Découvrir les soirées Power Night" data-en="Discover Power Night events">Découvrir les soirées Power Night</a>
+  </section>
+</main>
+
+<footer>
+  <span data-fr="Une question ?" data-en="Any question?">Une question ?</span>
+  <a href="mailto:contact@powernight.fr">contact@powernight.fr</a>
+</footer>
+
+<script>
+(function () {
+  // Supabase renvoie ici après le clic sur le lien de confirmation.
+  // Succès : #access_token=…&type=signup — Erreur : ?error=…&error_code=otp_expired (ou dans le fragment).
+  var hash = new URLSearchParams(location.hash.replace(/^#/, ''));
+  var query = new URLSearchParams(location.search);
+  var hasError = hash.has('error') || hash.has('error_code') || query.has('error') || query.has('error_code');
+  var isRecovery = !hasError && (hash.get('type') === 'recovery' || query.get('type') === 'recovery');
+
+  // Lien « mot de passe oublié » : on continue sur la page dédiée, avec le jeton
+  if (isRecovery) {
+    location.replace('/nouveau-mot-de-passe.html' + location.hash);
+    return;
+  }
+
+  // Ne jamais conserver de jeton dans la barre d'adresse ni l'historique
+  if (location.hash || location.search) {
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+  }
+
+  if (hasError) {
+    document.getElementById('card').classList.add('is-error');
+    document.querySelector('[data-state="ok"]').hidden = true;
+    document.querySelector('[data-state="error"]').hidden = false;
+    document.getElementById('icon-ok').setAttribute('hidden', '');
+    document.getElementById('icon-err').removeAttribute('hidden');
+  }
+
+  if (isRecovery) {
+    document.querySelector('[data-state="ok"]').hidden = true;
+    document.querySelector('[data-state="recovery"]').hidden = false;
+  }
+
+  var titles = {
+    fr: hasError ? 'Lien expiré — Power Night' : isRecovery ? 'Mot de passe — Power Night' : 'Adresse e-mail confirmée — Power Night',
+    en: hasError ? 'Link expired — Power Night' : isRecovery ? 'Password — Power Night' : 'Email address confirmed — Power Night'
+  };
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.title = titles[lang];
+    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+      el.textContent = el.getAttribute('data-' + lang);
+    });
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === lang));
+    });
+    try { localStorage.setItem('pn-lang', lang); } catch (e) {}
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem('pn-lang'); } catch (e) {}
+  var browser = (navigator.language || 'fr').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+  setLang(saved === 'fr' || saved === 'en' ? saved : browser);
+
+  document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
+</body>
+</html>

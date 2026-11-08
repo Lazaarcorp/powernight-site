@@ -149,6 +149,15 @@ h1 .full{display:block;color:var(--text)}
 .roles h3{margin:1.4rem 0 1rem;font:900 clamp(2.4rem,5vw,4rem)/.95 var(--display);text-transform:uppercase;transition:color .3s}
 .roles li:hover h3{color:var(--signal)}
 .roles p{margin:0;max-width:420px;color:#d6daf5}
+.roles .rp{grid-column:2;grid-row:1/4;display:flex;align-items:center;gap:1.4rem;align-self:center}
+.rp__id{text-align:right}
+.rp__id b{display:block;font:900 clamp(1.4rem,2.2vw,1.9rem)/1 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.rp__id a{display:inline-flex;align-items:center;gap:.45rem;margin-top:.7rem;color:var(--signal);font-size:.88rem;font-weight:700;text-decoration:none}
+.rp__id a svg{grid-column:auto;grid-row:auto;width:15px;height:15px;color:currentColor}
+.rp__id a:hover{color:#b3c1ff}
+.rp img{width:148px;height:185px;object-fit:cover;object-position:50% 20%;clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%);border:1px solid var(--line-2);transition:transform .4s var(--ease)}
+.roles li:hover .rp img{transform:scale(1.03)}
+@media (max-width:720px){.roles li{grid-template-columns:1fr}.roles .rp{grid-column:1;grid-row:auto;order:5;margin-top:1.6rem;flex-direction:row-reverse;justify-content:flex-end}.rp__id{text-align:left}.rp img{width:96px;height:120px}}
 .boxes{margin-top:4rem;border:1px solid var(--line-2);background:rgba(8,6,24,.6)}
 .box{padding:2.4rem 1.6rem 2.6rem}
 .box+.box{border-top:1px solid var(--line-2)}
@@ -185,26 +194,6 @@ h1 .full{display:block;color:var(--text)}
 .chips{display:flex;flex-wrap:wrap;gap:.7rem;margin:2.4rem 0 1.8rem;padding:0;list-style:none}
 .chips li{border:2px solid rgba(255,255,255,.55);padding:.45rem 1rem;font:700 .82rem var(--body);text-transform:uppercase;letter-spacing:.06em}
 .call p{max-width:620px;font-size:1.2rem;margin:0 0 2.2rem}
-
-/* panel */
-.panel{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:clamp(1.2rem,2.6vw,2rem);margin:4rem 0 0;padding:0;list-style:none}
-.pm{position:relative;border:1px solid var(--line-2);background:rgba(8,6,24,.6);transition:border-color .3s,transform .4s var(--ease)}
-.pm:hover{border-color:var(--signal);transform:translateY(-4px)}
-.pm__ph{position:relative;aspect-ratio:4/5;overflow:hidden;clip-path:polygon(0 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%);background:linear-gradient(140deg,#2a0b4a 0%,#2324c8 60%,#4c7cf0 100%)}
-.pm__ini{position:absolute;inset:0;display:grid;place-items:center;font:900 clamp(4rem,9vw,6rem)/1 var(--display);color:rgba(244,245,255,.85);letter-spacing:.02em}
-.pm__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;transition:transform .6s var(--ease)}
-.pm__ph::after{content:"";position:absolute;inset:auto 0 0 0;height:35%;pointer-events:none;background:linear-gradient(to top,rgba(14,10,38,.55),transparent)}
-.pm:hover .pm__ph img{transform:scale(1.03)}
-.pm__post{position:absolute;left:0;bottom:0;z-index:1;background:var(--signal);color:var(--ink);font:800 1.05rem/1 var(--display);text-transform:uppercase;letter-spacing:.06em;padding:.6rem .95rem}
-.pm--rssi .pm__post{background:var(--alert);color:#fff}
-.pm--ai .pm__post{background:#fff;color:var(--ink-3)}
-.pm__body{padding:1.4rem 1.3rem 1.5rem}
-.pm__body .mono{color:var(--muted)}
-.pm__body h3{margin:.7rem 0 .35rem;font:900 clamp(1.9rem,3vw,2.4rem)/.95 var(--display);text-transform:uppercase}
-.pm__body p{margin:0;color:#d6daf5;font-size:.98rem}
-.pm__in{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.1rem;color:var(--signal);font-size:.9rem;font-weight:700;text-decoration:none}
-.pm__in svg{width:16px;height:16px}
-.pm__in:hover{color:#b3c1ff}
 
 /* programme */
 .addr{color:var(--muted);font-size:1.1rem;margin:1.6rem 0 0}
@@ -336,7 +325,6 @@ h1 .full{display:block;color:var(--text)}
     <button class="nav__toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <ul class="nav__links" id="menu">
       <li><a href="#evenement">L’événement</a></li>
-      <li><a href="#panel">Le panel</a></li>
       <li><a href="#programme">Programme</a></li>
       <li><a href="editions.html">Éditions passées</a></li>
       <li><a href="#sponsoring">Sponsoring</a></li>
@@ -411,11 +399,12 @@ h1 .full{display:block;color:var(--text)}
   <!-- RÔLES -->
   <section class="sec sec--alt" aria-labelledby="roles-h">
     <div class="wrap">
-      <h2 class="h2 rv" id="roles-h">Quatre rôles,<br>quatre regards <em>à la barre</em></h2>
+      <h2 class="h2 rv" id="roles-h">Cinq rôles,<br>cinq regards <em>à la barre</em></h2>
       <p class="lead rv" style="max-width:500px">Chacun défend sa lecture du dossier Max. À vous de peser les arguments.</p>
       <ul class="roles">
-        <li class="rv"><span class="mono">Le témoin à charge</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><h3>RSSI ou CISO</h3><p>Il avait prévenu, preuves à l’appui.</p></li>
-        <li class="rv"><span class="mono">La défense</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M19 9h3M19 15h3M2 9h3M2 15h3"/></svg><h3>Lead AI ou CDO</h3><p>Il montre la valeur de l’agent et où placer le curseur.</p></li>
+        <li class="rv"><span class="mono">La direction</span><div class="rp"><div class="rp__id"><b>Gabriela Belaid</b><a href="https://www.linkedin.com/in/gabriela-belaid/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>LinkedIn</a></div><img src="assets/img/panel/gabriela-belaid.jpg" alt="Gabriela Belaid" width="480" height="600" loading="lazy"></div><h3>CEO</h3><p>Elle décide, et c’est elle qui en répond.</p></li>
+        <li class="rv"><span class="mono">Le témoin à charge</span><div class="rp"><div class="rp__id"><b>Alexandre Le-Kim</b><a href="https://www.linkedin.com/in/alexandre-le-kim/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>LinkedIn</a></div><img src="assets/img/panel/alexandre-le-kim.jpg" alt="Alexandre Le-Kim" width="480" height="600" loading="lazy"></div><h3>RSSI ou CISO</h3><p>Il avait prévenu, preuves à l’appui.</p></li>
+        <li class="rv"><span class="mono">La défense</span><div class="rp"><div class="rp__id"><b>Florian Bruniaux</b><a href="https://www.linkedin.com/in/florian-bruniaux-43408b83/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>LinkedIn</a></div><img src="assets/img/panel/florian-bruniaux.jpg" alt="Florian Bruniaux" width="480" height="600" loading="lazy"></div><h3>Lead AI ou CDO</h3><p>Il montre la valeur de l’agent et où placer le curseur.</p></li>
         <li class="rv"><span class="mono">La voix de la règle</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M12 3v18M7 21h10M4 7h16M6 7l-3 7a3 3 0 0 0 6 0zM18 7l-3 7a3 3 0 0 0 6 0z"/></svg><h3>DPO ou juriste</h3><p>RGPD, AI Act, ce qui s’applique déjà.</p></li>
         <li class="rv"><span class="mono">L’expert judiciaire</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2.5" y="5" width="19" height="14" rx="1.5"/><path d="M3 6l9 7 9-7M17 16l3 3M20 16l-3 3"/></svg><h3>Red Teamer</h3><p>Il explique comment un simple email retourne l’agent.</p></li>
       </ul>
@@ -457,31 +446,6 @@ h1 .full{display:block;color:var(--text)}
       <ul class="chips rv"><li>15 min de parole</li><li>Script fourni</li><li>Faits sourcés</li><li>~80 personnes</li><li>Captation vidéo</li></ul>
       <p class="rv">Prenez place à la barre : script, questions et faits sourcés fournis. Captation vidéo, relais LinkedIn et mention sponsors.</p>
       <span class="btn btn--light btn--off rv" role="button" aria-disabled="true">Inscriptions complètes</span>
-    </div>
-  </section>
-
-  <!-- PANEL -->
-  <section class="sec" id="panel" aria-labelledby="panel-h">
-    <div class="wrap">
-      <h2 class="h2 rv" id="panel-h">Le panel,<br><em>à la barre</em></h2>
-      <p class="lead rv">Les experts qui prendront la parole lors du procès de l’agent IA.</p>
-      <ul class="panel">
-        <li class="pm rv">
-          <div class="pm__ph"><span class="pm__ini" aria-hidden="true">GB</span><img src="assets/img/panel/gabriela-belaid.jpg" alt="Gabriela Belaid" width="800" height="1000" loading="lazy" onerror="this.remove()"><span class="pm__post">CEO</span></div>
-          <div class="pm__body"><span class="mono">Panéliste</span><h3>Gabriela Belaid</h3><p>CEO</p>
-            <a class="pm__in" href="https://www.linkedin.com/in/gabriela-belaid/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>LinkedIn</a></div>
-        </li>
-        <li class="pm pm--rssi rv">
-          <div class="pm__ph"><span class="pm__ini" aria-hidden="true">AL</span><img src="assets/img/panel/alexandre-le-kim.jpg" alt="Alexandre Le-Kim" width="800" height="1000" loading="lazy" onerror="this.remove()"><span class="pm__post">RSSI</span></div>
-          <div class="pm__body"><span class="mono">Le témoin à charge</span><h3>Alexandre Le-Kim</h3><p>RSSI</p>
-            <a class="pm__in" href="https://www.linkedin.com/in/alexandre-le-kim/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>LinkedIn</a></div>
-        </li>
-        <li class="pm pm--ai rv">
-          <div class="pm__ph"><span class="pm__ini" aria-hidden="true">FB</span><img src="assets/img/panel/florian-bruniaux.jpg" alt="Florian Bruniaux" width="800" height="1000" loading="lazy" onerror="this.remove()"><span class="pm__post">Lead AI</span></div>
-          <div class="pm__body"><span class="mono">La défense</span><h3>Florian Bruniaux</h3><p>Lead AI</p>
-            <a class="pm__in" href="https://www.linkedin.com/in/florian-bruniaux-43408b83/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>LinkedIn</a></div>
-        </li>
-      </ul>
     </div>
   </section>
 
